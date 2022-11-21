@@ -80,7 +80,7 @@ with torch.no_grad():
         images = (images * 255).astype(np.uint8)
         image = Image.fromarray(images)
         draw = ImageDraw.Draw(image)
-        font = ImageFont.truetype('arial.ttf', 25)
+        font = ImageFont.load_default()
         predicted_class_str = class_names[predicted.item()]
         # Draw the predicted class label on the image 
         draw.text((5, 5), predicted_class_str, (0, 0, 0), font=font)
