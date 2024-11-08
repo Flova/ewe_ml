@@ -7,13 +7,18 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-torch = "^1.12.0"
 tabulate = "^0.9.0"
 argparse = "^1.4.0"
-torchvision = "^0.13.0"
 tqdm = "^4.64.1"
+torch = {version = "^2.5.1+cpu", source = "pytorch_cpu"}
+torchvision = {version = "^0.20.1+cpu", source = "pytorch_cpu"}
 
 [tool.poetry.dev-dependencies]
+
+[[tool.poetry.source]]
+name = "pytorch_cpu"
+url = "https://download.pytorch.org/whl/cpu"
+priority = "explicit"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
