@@ -19,7 +19,7 @@ parser.add_argument('--num_classes', default=2, type=int, help='number of classe
 parser.add_argument('--image_size', default=224, type=int, help='image size')
 parser.add_argument('--output_path', default='.', type=str, help='path to save the predictions')
 parser.add_argument('--num_workers', default=4, type=int, help='number of workers')
-args = parser.parse_args() 
+args = parser.parse_args()
 
 # Define the device
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -62,7 +62,7 @@ test_loader = DataLoader(test_dataset, batch_size=1, shuffle=False, num_workers=
 # Load the checkpoint
 checkpoint = torch.load(args.checkpoint_path)
 model.load_state_dict(checkpoint['state_dict'])
-class_names = checkpoint['class_names'] 
+class_names = checkpoint['class_names']
 
 # Predict the classes of all images in the given folder
 model.eval()
@@ -80,10 +80,10 @@ with torch.no_grad():
         images = (images * 255).astype(np.uint8)
         image = Image.fromarray(images)
         draw = ImageDraw.Draw(image)
-        font = ImageFont.load_default()
+        font = ImageFont.truetype('roboto/Roboto-Regular.ttf', 40)
         predicted_class_str = class_names[predicted.item()]
-        # Draw the predicted class label on the image 
-        draw.text((5, 5), predicted_class_str, (0, 0, 0), font=font)
+        # Draw the predicted class label on the image
+        draw.text((5, 5), predicted_class_str, (255, 0, 255), font=font)
         image.save(os.path.join(args.output_path, names[0]))
         # Store the predictions
         predictions.append([names[0], predicted_class_str])
